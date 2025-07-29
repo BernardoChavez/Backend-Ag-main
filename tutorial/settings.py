@@ -27,7 +27,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-^_u*p*k+oz()qb=ict#nv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['api','localhost', '127.0.0.1', '.render.com']
+ALLOWED_HOSTS = [
+    'api',
+    'localhost',
+    '127.0.0.1',
+    '.render.com',
+    'backend-ag-main-2.onrender.com',  # <--- agrega tu dominio aquí
+]
 
 
 # Application definition

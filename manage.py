@@ -15,20 +15,9 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-
-    # --- Agrega esto antes de ejecutar el comando ---
-    if "RENDER" in os.environ:
-        port = os.environ.get("PORT", "10000")
-        if "runserver" in sys.argv:
-            for i, arg in enumerate(sys.argv):
-                if arg == "runserver":
-                    sys.argv[i+1:i+1] = [f"0.0.0.0:{port}"]
-                    break
-    # ------------------------------------------------
-
+        
     execute_from_command_line(sys.argv)
 
 
 if __name__ == '__main__':
     main()
-    

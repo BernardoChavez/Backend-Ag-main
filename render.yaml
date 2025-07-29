@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: chmod +x build.sh && ./build.sh
-    startCommand: gunicorn tutorial.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: python manage.py migrate && gunicorn tutorial.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -21,4 +21,4 @@ services:
     databases:
       - name: backendag-db
         databaseName: backendag
-        user: backendag_user 
+        user: backendag_user

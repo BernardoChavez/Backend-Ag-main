@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# exit on error
-set -o errexit
+# build.sh para Render
 
-# Instalar dependencias
-pip install -r api/requirements.txt
+echo "Instalando dependencias..."
+pip install --upgrade pip
+pip install -r requirements.txt
 
-# Ejecutar migraciones
-python manage.py collectstatic --no-input
-python manage.py migrate 
+echo "Aplicando migraciones..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+
+echo "Recolectando archivos estáticos..."
+python manage.py collectstatic --noinput

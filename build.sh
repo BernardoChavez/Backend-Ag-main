@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# build.sh para Render
+
 
 echo "Instalando dependencias..."
 pip install --upgrade pip

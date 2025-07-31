@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -69,3 +70,51 @@ class RegisterView(APIView):
                         "email": user.email,
                         "telefono": usuario.telefono,
                         "direccion": usuario.direccion}, status = status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def create_test_users(request):
+    try:
+        # Usuario 1
+        user1 = User.objects.create_user(
+            username='admin',
+            password='admin123',
+            email='admin@example.com'
+        )
+        usuario1 = Usuario.objects.create(
+            user=user1,
+            telefono='123456789',
+            direccion='Calle Admin 123'
+        )
+        
+        # Usuario 2
+        user2 = User.objects.create_user(
+            username='testuser',
+            password='testpass123',
+            email='test@example.com'
+        )
+        usuario2 = Usuario.objects.create(
+            user=user2,
+            telefono='987654321',
+            direccion='Calle Test 456'
+        )
+        
+        return Response({
+            'message': 'Usuarios de prueba creados exitosamente',
+            'usuarios': [
+                {
+                    'username': user1.username,
+                    'password': 'admin123',
+                    'email': user1.email
+                },
+                {
+                    'username': user2.username,
+                    'password': 'testpass123',
+                    'email': user2.email
+                }
+            ]
+        }, status=status.HTTP_201_CREATED)
+        
+    except Exception as e:
+        return Response({
+            'error': f'Error creando usuarios: {str(e)}'
+        }, status=status.HTTP_400_BAD_REQUEST)

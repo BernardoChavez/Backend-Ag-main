@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'api',
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -165,4 +167,9 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://fronted-ag.vercel.app',  # Tu dominio de Vercel
+]   
 
